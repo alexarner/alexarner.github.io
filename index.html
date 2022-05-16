@@ -14571,9 +14571,14 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <p>Good thing theres an API to examine exactly this.</p>
 <p>The Spotify API allows song data to be accessed and analyzed. There are 13 variables we will consider in this tutorial:</p>
 <ul>
-<li>popularity
-* </li>
-<li>duration_ms</li>
+<li>popularity<ul>
+<li>"The popularity of a track is a value between 0 and 100, with 100 being the most popular. The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are."</li>
+</ul>
+</li>
+<li>duration_ms<ul>
+<li>length of song, in milliseconds</li>
+</ul>
+</li>
 <li>danceability<ul>
 <li>"Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable."</li>
 </ul>
@@ -14992,7 +14997,8 @@ while i &lt; len(track_columns):
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>I will not generate all 78 graphs within the page. I have looked through these graphs and noticed some interesting trends. 
+<p>This snippit of code will plot all 78 unique variable combinations. This is too much to include in this page.</p>
+<p>However, I have looked through these graphs and noticed some interesting trends. 
 I will show a select few below.</p>
 <h1 id="Exploratory-data-analysis">Exploratory data analysis<a class="anchor-link" href="#Exploratory-data-analysis">&#182;</a></h1>
 </div>
@@ -15286,7 +15292,7 @@ Now lets look at the distribution of popularity values.<div class="jp-Cell jp-Co
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>This chart illustrates the magnitude of these two clusters of data.</p>
 <p>According to this histogram, theres a large population from popularity levels 60 to 90, and a smaller but still significant cluster at lower values.</p>
-<p>These lower popularity levels are suprising; aren't these playlists meant to contain hit songs?</p>
+<p>These lower popularity levels are suprising; didn't these playlists indicate in their titles that they're hit songs?</p>
 
 </div>
 </div>
@@ -15469,7 +15475,7 @@ Now lets look at the distribution of popularity values.<div class="jp-Cell jp-Co
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Perhaps this skew is due to the old age of the 90s playlist.</p>
+<p>Perhaps this skew is due to the old age of the 90s playlist. Popularity rating does factor in recent plays.</p>
 <p>The previous popularity graphs show that the majority of the most popular songs (within the 60-90 cluster) have low liveness, acousticness, and speechiness ratings. I would hypothesize that this is at or below the mean of these metrics.</p>
 <p>speechiness</p>
 <ul>
@@ -15495,7 +15501,7 @@ Now lets look at the distribution of popularity values.<div class="jp-Cell jp-Co
 <li>max:     0.744</li>
 <li>min:     0.0248</li>
 </ul>
-<p>This next section will be several graphs to highlight some more trends.</p>
+<p>This next section will be several graphs to highlight some additional trends.</p>
 
 </div>
 </div>
@@ -15813,27 +15819,294 @@ Now lets look at the distribution of popularity values.<div class="jp-Cell jp-Co
 <li>are acousticness, speechiness, and liveness are related?</li>
 <li>are energy v loudness are positively correlated?</li>
 <li>are energy v acousticness are negatively correlated?</li>
-<li>are songs with popularity rating between 60 and 90 have liveness, acousticness, and speechiness pretty low, around 0.1. This is at or below the mean with these metrics. </li>
+<li>do songs with popularity rating between 60 and 90 have liveness, acousticness, and speechiness rating at or below the mean?</li>
 </ul>
-<p>In the next several sections, we will test these hypotheses.</p>
+<p>In the next several sections, we shall test these hypotheses and see if they can be validated.</p>
 <h1 id="Hypothesis-Testing">Hypothesis Testing<a class="anchor-link" href="#Hypothesis-Testing">&#182;</a></h1>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[123]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[182]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">playlist_df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[182]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>popularity</th>
+      <th>duration_ms</th>
+      <th>danceability</th>
+      <th>energy</th>
+      <th>key</th>
+      <th>loudness</th>
+      <th>mode</th>
+      <th>speechiness</th>
+      <th>acousticness</th>
+      <th>instrumentalness</th>
+      <th>liveness</th>
+      <th>valence</th>
+      <th>tempo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>popularity</th>
+      <td>1.000000</td>
+      <td>-0.135695</td>
+      <td>0.166618</td>
+      <td>0.061449</td>
+      <td>-0.049112</td>
+      <td>0.209813</td>
+      <td>0.074440</td>
+      <td>0.006396</td>
+      <td>-0.030370</td>
+      <td>-0.048985</td>
+      <td>-0.024560</td>
+      <td>0.120442</td>
+      <td>0.052794</td>
+    </tr>
+    <tr>
+      <th>duration_ms</th>
+      <td>-0.135695</td>
+      <td>1.000000</td>
+      <td>-0.318171</td>
+      <td>-0.177655</td>
+      <td>-0.044943</td>
+      <td>-0.247730</td>
+      <td>0.087513</td>
+      <td>-0.104406</td>
+      <td>0.123911</td>
+      <td>-0.033284</td>
+      <td>-0.070431</td>
+      <td>-0.228740</td>
+      <td>0.020698</td>
+    </tr>
+    <tr>
+      <th>danceability</th>
+      <td>0.166618</td>
+      <td>-0.318171</td>
+      <td>1.000000</td>
+      <td>0.056977</td>
+      <td>0.099331</td>
+      <td>0.082744</td>
+      <td>-0.117073</td>
+      <td>0.148052</td>
+      <td>-0.078297</td>
+      <td>0.180658</td>
+      <td>-0.077325</td>
+      <td>0.479922</td>
+      <td>-0.238851</td>
+    </tr>
+    <tr>
+      <th>energy</th>
+      <td>0.061449</td>
+      <td>-0.177655</td>
+      <td>0.056977</td>
+      <td>1.000000</td>
+      <td>-0.052949</td>
+      <td>0.679775</td>
+      <td>-0.143800</td>
+      <td>0.046513</td>
+      <td>-0.544197</td>
+      <td>0.104414</td>
+      <td>0.152320</td>
+      <td>0.421362</td>
+      <td>0.180015</td>
+    </tr>
+    <tr>
+      <th>key</th>
+      <td>-0.049112</td>
+      <td>-0.044943</td>
+      <td>0.099331</td>
+      <td>-0.052949</td>
+      <td>1.000000</td>
+      <td>-0.031674</td>
+      <td>-0.024911</td>
+      <td>0.120605</td>
+      <td>-0.006263</td>
+      <td>0.045496</td>
+      <td>-0.007901</td>
+      <td>0.022143</td>
+      <td>-0.044947</td>
+    </tr>
+    <tr>
+      <th>loudness</th>
+      <td>0.209813</td>
+      <td>-0.247730</td>
+      <td>0.082744</td>
+      <td>0.679775</td>
+      <td>-0.031674</td>
+      <td>1.000000</td>
+      <td>-0.099331</td>
+      <td>0.037296</td>
+      <td>-0.300585</td>
+      <td>-0.041685</td>
+      <td>0.044034</td>
+      <td>0.287911</td>
+      <td>0.186471</td>
+    </tr>
+    <tr>
+      <th>mode</th>
+      <td>0.074440</td>
+      <td>0.087513</td>
+      <td>-0.117073</td>
+      <td>-0.143800</td>
+      <td>-0.024911</td>
+      <td>-0.099331</td>
+      <td>1.000000</td>
+      <td>-0.049034</td>
+      <td>0.113659</td>
+      <td>-0.086359</td>
+      <td>-0.079507</td>
+      <td>-0.150959</td>
+      <td>-0.057190</td>
+    </tr>
+    <tr>
+      <th>speechiness</th>
+      <td>0.006396</td>
+      <td>-0.104406</td>
+      <td>0.148052</td>
+      <td>0.046513</td>
+      <td>0.120605</td>
+      <td>0.037296</td>
+      <td>-0.049034</td>
+      <td>1.000000</td>
+      <td>-0.066746</td>
+      <td>0.038628</td>
+      <td>0.060052</td>
+      <td>0.155359</td>
+      <td>-0.001808</td>
+    </tr>
+    <tr>
+      <th>acousticness</th>
+      <td>-0.030370</td>
+      <td>0.123911</td>
+      <td>-0.078297</td>
+      <td>-0.544197</td>
+      <td>-0.006263</td>
+      <td>-0.300585</td>
+      <td>0.113659</td>
+      <td>-0.066746</td>
+      <td>1.000000</td>
+      <td>-0.071863</td>
+      <td>-0.081726</td>
+      <td>-0.231028</td>
+      <td>-0.156199</td>
+    </tr>
+    <tr>
+      <th>instrumentalness</th>
+      <td>-0.048985</td>
+      <td>-0.033284</td>
+      <td>0.180658</td>
+      <td>0.104414</td>
+      <td>0.045496</td>
+      <td>-0.041685</td>
+      <td>-0.086359</td>
+      <td>0.038628</td>
+      <td>-0.071863</td>
+      <td>1.000000</td>
+      <td>-0.036998</td>
+      <td>0.156049</td>
+      <td>0.017167</td>
+    </tr>
+    <tr>
+      <th>liveness</th>
+      <td>-0.024560</td>
+      <td>-0.070431</td>
+      <td>-0.077325</td>
+      <td>0.152320</td>
+      <td>-0.007901</td>
+      <td>0.044034</td>
+      <td>-0.079507</td>
+      <td>0.060052</td>
+      <td>-0.081726</td>
+      <td>-0.036998</td>
+      <td>1.000000</td>
+      <td>0.024695</td>
+      <td>0.036598</td>
+    </tr>
+    <tr>
+      <th>valence</th>
+      <td>0.120442</td>
+      <td>-0.228740</td>
+      <td>0.479922</td>
+      <td>0.421362</td>
+      <td>0.022143</td>
+      <td>0.287911</td>
+      <td>-0.150959</td>
+      <td>0.155359</td>
+      <td>-0.231028</td>
+      <td>0.156049</td>
+      <td>0.024695</td>
+      <td>1.000000</td>
+      <td>-0.021589</td>
+    </tr>
+    <tr>
+      <th>tempo</th>
+      <td>0.052794</td>
+      <td>0.020698</td>
+      <td>-0.238851</td>
+      <td>0.180015</td>
+      <td>-0.044947</td>
+      <td>0.186471</td>
+      <td>-0.057190</td>
+      <td>-0.001808</td>
+      <td>-0.156199</td>
+      <td>0.017167</td>
+      <td>0.036598</td>
+      <td>-0.021589</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -15911,10 +16184,10 @@ Name: popularity, dtype: float64</pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[125]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">playlist_df</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;energy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">abs</span><span class="p">,</span> <span class="n">na_action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># this is a list of correlations after transforming them to their absolute value.</span>
+<span class="c1">#   lets compare populartity&#39;s list above with energy&#39;s correlations below. </span>
 
-<span class="c1"># this is a list of correlations, after transforming them to their absolute value.</span>
-<span class="c1">#   lets apply regression with progressively more variables, added by correlation rank</span>
+<span class="n">playlist_df</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">&#39;energy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">abs</span><span class="p">,</span> <span class="n">na_action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15960,6 +16233,15 @@ Name: energy, dtype: float64</pre>
 
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now lets try to apply multivariate linear regression to predict energy. From the correlations in the above output, it seems that energy is greatly correlated with loutness, acousticness, and valence.</p>
+<p>Lets see the results of multiple regressions and how accurate of a model we can obtain.</p>
+
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15968,7 +16250,9 @@ Name: energy, dtype: float64</pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[126]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># loudness v energy</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="c1"># loudness v energy</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
 
@@ -15978,7 +16262,7 @@ Name: energy, dtype: float64</pre>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;intercept:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;slope:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;slope:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;coefficient of determination:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
 </pre></div>
@@ -16031,7 +16315,7 @@ coefficient of determination: 0.46209350004286653
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;intercept:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;slope:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;slope:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;coefficient of determination:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
 </pre></div>
@@ -16084,7 +16368,7 @@ coefficient of determination: 0.29615089096504377
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;intercept:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;slope:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;slope:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;coefficient of determination:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
 </pre></div>
@@ -16119,15 +16403,6 @@ coefficient of determination: 0.5890765388442998
 
 </div>
 
-</div>
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Compared to the prior coefficient of determinations, 0.589 is a significant improvement.</p>
-<p>This regression could be used predict the energy rating. Could we improve this model?</p>
-
-</div>
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -16146,7 +16421,7 @@ coefficient of determination: 0.5890765388442998
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;intercept:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;slope:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;slope:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;coefficient of determination:&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
 </pre></div>
@@ -16238,7 +16513,7 @@ coefficient of determination: 0.6220332578064509
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Lets try predicting energy ratings with this model.</p>
+<p>From the above operations, we showed that single variable input regression doesn't produce as good of a model as multivarate regression with 3 significantly correlating variables. The last model created can somewhat confidently (very rough precision) predict the energy rating.</p>
 
 </div>
 </div>
@@ -16250,7 +16525,7 @@ coefficient of determination: 0.6220332578064509
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[178]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># lets select dataframe row index 23 randomly</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># for a quick example, lets select dataframe row index 23 randomly</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">playlist_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">23</span><span class="p">][</span><span class="s1">&#39;energy&#39;</span><span class="p">]))</span>
 <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="n">playlist_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">23</span><span class="p">][</span><span class="s1">&#39;acousticness&#39;</span><span class="p">],</span> <span class="n">playlist_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">23</span><span class="p">][</span><span class="s1">&#39;loudness&#39;</span><span class="p">],</span> <span class="n">playlist_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">23</span><span class="p">][</span><span class="s1">&#39;valence&#39;</span><span class="p">]]])[</span><span class="mi">0</span><span class="p">]</span>
@@ -16315,7 +16590,8 @@ coefficient of determination: 0.6220332578064509
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>0.75265 is pretty close to 0.699. This model can be used as a rough estimater. What if tempo is added as an additional input variable?</p>
+<p>Ignore the warning.</p>
+<p>The result of 0.75265 is pretty close to 0.699. If we added tempo (the next highest correlating variable), could we improve the model further? What if tempo is added as an additional input variable?</p>
 
 </div>
 </div>
@@ -16376,17 +16652,8 @@ coefficient of determination: 0.6232099671268112
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Interesting, there is only a marginal increase in r^2 when tempo is included.</p>
-<p>With the correlation ranking,</p>
-
-<pre><code>loudness            0.679775
-acousticness        0.544197
-valence             0.421362
-tempo               0.180015
-duration_ms         0.177655
-liveness            0.152320</code></pre>
-<p>This serves as evidence that variables with higher correlation values make for better predictors in multivariate regression. With this model, energy rating can be predicted with some accuracy.</p>
-<p>Unfortunately, popularity isn't as simple as this energy rating.</p>
+<p>Very Interesting. There is only a marginal increase of the coefficient of determination when tempo is included in the regression input. I would suspect that as more variables are added the coefficient of determination will hit a value ceiling.</p>
+<p>Unfortunately for us, popularity isn't as simple as this energy rating. The popularity correlations are printed below.</p>
 
 <pre><code>popularity          1.000000
 loudness            0.209813
@@ -16401,7 +16668,8 @@ instrumentalness    0.048985
 acousticness        0.030370
 liveness            0.024560
 speechiness         0.006396</code></pre>
-<p>Popularity does not have high correlation like energy. They are weak predicters to popularity. Therefore, linear regression like we previously perfomed most likely can't make a model to accurately predict popularity rating.</p>
+<p>Popularity does not have as high of correlation with other variables like energy does. Most likely, regression will perform poorly with these variables. Linear regression like we previously perfomed most likely can't make a model to accurately predict the popularity rating.</p>
+<p>Below tests if acousticness, speechiness, and liveness are related or not.</p>
 
 </div>
 </div>
@@ -16422,7 +16690,7 @@ speechiness         0.006396</code></pre>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">acousticness v liveness </span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;acousticness&#39;</span><span class="p">][</span><span class="s1">&#39;liveness&#39;</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">speechiness v liveness  </span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;speechiness&#39;</span><span class="p">][</span><span class="s1">&#39;liveness&#39;</span><span class="p">]))</span>
 
-<span class="c1"># These correlation values are very small. It doesn&#39;t seem like these three variables are related strongly. Their graphs happen to be incredibly similar in shape however. </span>
+<span class="c1"># These correlation values are very small. It doesn&#39;t seem like these three variables are related strongly. Their graphs happen to be incredibly similar in shape though. </span>
 </pre></div>
 
      </div>
@@ -16461,7 +16729,7 @@ speechiness         0.006396</code></pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Now lets test if songs with popularity rating between 60 and 90 have low liveness, acousticness, and speechiness rating.</p>
-<p>I previously hypothesized that this low value will be lower than their respective mean values. Lets investigate this by sectioning off the playlist by popularity ranking.</p>
+<p>I previously hypothesized that this low value will be lower than their respective mean values. Lets investigate this by parsing the playlist by popularity ranking.</p>
 
 </div>
 </div>
@@ -16473,13 +16741,10 @@ speechiness         0.006396</code></pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[151]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># parse data by popularity rating</span>
-
-<span class="n">df_popular</span> <span class="o">=</span> <span class="n">playlist_df</span><span class="p">[</span><span class="n">playlist_df</span><span class="o">.</span><span class="n">popularity</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_popular</span> <span class="o">=</span> <span class="n">playlist_df</span><span class="p">[</span><span class="n">playlist_df</span><span class="o">.</span><span class="n">popularity</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">]</span>
 <span class="n">df_popular</span> <span class="o">=</span> <span class="n">df_popular</span><span class="p">[</span><span class="n">df_popular</span><span class="o">.</span><span class="n">popularity</span> <span class="o">&lt;=</span> <span class="mi">90</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# of sectioned songs with popularity within [60,90]:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_popular</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;proportion of total: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_popular</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">playlist_df</span><span class="p">))</span>
-
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# of sectioned songs with popularity within 60 to 90:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_popular</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;proportion of total # of songs: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_popular</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">playlist_df</span><span class="p">))</span>
 
 <span class="n">play_means</span> <span class="o">=</span> <span class="n">playlist_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numeric_only</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">play_std</span> <span class="o">=</span> <span class="n">playlist_df</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">numeric_only</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
@@ -16558,6 +16823,7 @@ speechiness:
 <h1 id="Communication-of-Insights-attained">Communication of Insights attained<a class="anchor-link" href="#Communication-of-Insights-attained">&#182;</a></h1><p>In the dataset, if popularity is 60 to 90 then theres a good chance liveness/acousticness/speechiness value decreases slightly compared to the average.</p>
 <p>Even though their graphs look very similar, acousticness, speechiness, and liveness are not correlated.</p>
 <p>Acousticness, loudness, and valence can be used to predict energy rating for 62.203% of the data (according to the coefficient of determination). This is the best predictive model obtained from this tutorial. We obtained this by rank ordering energy correlation with other column variables and selecting the most correlative one after another to include as a input variable. This resulted in a functional model that is a rough estimater but accurate.</p>
+<p>Further stratification is most likely required in order to obtain any insights on predictors of popularity. If not limited by sample size, perhaps a macro trend could be discovered.</p>
 
 </div>
 </div>
