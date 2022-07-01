@@ -3,6 +3,6 @@
 @use '@nebular/theme/styles/globals' as *;
 
 @include nb-install() {
-  @include nb-theme-global();
+	@include nb-theme-global();
 };
 /* You can add global styles to this file, and also import other style files */
