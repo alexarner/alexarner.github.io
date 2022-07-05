@@ -1,14 +1,22 @@
-.item {
+.grid {
+	display: grid;
 
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	//grid-template-rows: repeat(2, 1fr);
+	direction: ltr;
+}
+.item {
 	--stagger-delay: 100ms;
 	animation: cardEntrance 700ms ease-out;
 	animation-fill-mode: backwards;
 	border-radius: 16px;
 	transition: filter .5s;
+	cursor: pointer;
 }
 .item:hover {
 	transform: scale(1.06);
 	filter: brightness(1.5)
+	
 }
 
 @keyframes cardEntrance {
@@ -28,3 +36,14 @@
 .item:nth-child(2) { grid-area: 2; animation-delay: calc(2 * var(--stagger-delay)); }
 .item:nth-child(3) { grid-area: 3; animation-delay: calc(3 * var(--stagger-delay)); }
 .item:nth-child(4) { grid-area: 4; animation-delay: calc(4 * var(--stagger-delay)); }
+
+span.timer-text-area { 
+	position: fixed;
+    left: 35px;
+}
+
+@media screen and (max-width:500px) {
+	span.timer-text-area { 
+		display: none
+	}
+}

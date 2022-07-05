@@ -1,38 +1,28 @@
 <nb-layout>
 	<nb-layout-header fixed>
-			<h1>Welcome!</h1>
+			<h4>Welcome to Alex's Website</h4>
 	</nb-layout-header>
 	<nb-layout-column>
-		<nb-card class="body">
+		<nb-card class="body" >
 			<nb-card-body>
-				<nb-card class="item">
-					<nb-card-body>
-						<h3 style="text-align: center;">Under</h3>
-					</nb-card-body>
-				</nb-card>
-				<nb-card class="item">
-					<nb-card-body>
-						<h3 style="text-align: center;">Construction</h3>
-					</nb-card-body>
-				</nb-card>
-				<nb-card class="item">
-					<nb-card-body>
-						<h3 style="text-align: center;">Check</h3>
-					</nb-card-body>
-				</nb-card>
-				<nb-card class="item">
-					<nb-card-body>
-						<h3 style="text-align: center;">Later</h3>
-					</nb-card-body>
-				</nb-card>
+				<nb-tabset>
+					<nb-tab tabTitle="About Me">
+						<cv></cv>
+					</nb-tab>
+					<nb-tab tabTitle="Enter Password Here">
+						<password-page></password-page>
+					</nb-tab>
+				</nb-tabset>
 			</nb-card-body>
-			
 		</nb-card>
+		
 	</nb-layout-column>
-	
+
 	
 	<nb-layout-footer fixed>
-		alexarner@gmail.com
+		<span class="timer-text-area"> {{getTime() | timeFormat}} </span>
+		<span class="email-text-area"> alexarner@gmail.com </span>
+		
 	</nb-layout-footer>
 
 </nb-layout>
